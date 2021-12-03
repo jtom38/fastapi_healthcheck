@@ -4,7 +4,7 @@ from .service import HealthCheckFactory
 from .enum import HealthCheckStatusEnum
 
 
-async def healthCheckRoute(factory: HealthCheckFactory) -> Callable:
+def healthCheckRoute(factory: HealthCheckFactory) -> Callable:
     """
     This function is passed to the add_api_route with the built factory.
 
