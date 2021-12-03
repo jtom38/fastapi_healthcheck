@@ -1,35 +1,35 @@
 # fastapi_healthcheck
 
-Easy to use health check for your FastAPI.  This is the root module that will let you add 
+Easy to use health check for your FastAPI.  This is the root module that will let you add implement and expand your usage of health checks, with FastAPI.
+
+This module does not contain any service checkers, but you can easily add them.  The other modules are not in this root module due to different dependencies required for each one.  This is made so you only bring in the packages that you need to not add extra packages.
 
 ## Adding Health Checks
 
-This module alone will not give you all the HealthChecks that you would need, but this gives you the factory that other modules can use.
+Here is what you need to get started.
 
 ```python
 from fastapi import FastAPI
-from fastapi_healthcheck import HealthCheckFactory, HealthCheckModel
+from fastapi_healthcheck import HealthCheckFactory, healthCheckRoute
 
 app = FastAPI()
 
 # Add Health Checks
 _healthChecks = HealthCheckFactory()
+
+# SQLAlchemy comes from fastapi-healthcheck-sqlalchemy
 _healthChecks.add(HealthCheckSQLAlchemy(alias='postgres db', connectionUri=cs.value, table=SmtpContactsSqlModel, tags=('postgres', 'db', 'sql01')))
+
+# This will check external URI and validate the response that is returned.
+# fastapi-healthcheck-uri
 _healthChecks.add(HealthCheckUri(alias='reddit', connectionUri="https://www.reddit.com/r/aww.json", tags=('external', 'reddit', 'aww')))
-@app.get('/health')
-def getHealth() -> HealthCheckModel:
-    res = _healthChecks.check()
-    if res['status'] == HealthCheckStatusEnum.UNHEALTHY.value:
-        return JSONResponse(content=res, status_code=500)
-    return JSONResponse(content=res, status_code=200)
+app.add_api_route('/health', endpoint=healthCheckRoute(factory=_healthChecks))
 
 ```
 
-This is an example of what you would add to your project
-
 ## Returned Data
 
-When you request your health check, it will go and check all the entries that have been submited and run a basic query against them.  If they come back as expected, then a status
+When you request your health check, it will go and check all the entries that have been submitted and run a basic query against them.  If they come back as expected, then a status code is 200.  But if it runs into an error, it will return a 500 error.
 
 ```json
 
@@ -55,9 +55,8 @@ When you request your health check, it will go and check all the entries that ha
 
 ## Available Modules
 
-* [fastapi_healthcheck_sqlalchemy]()
-* [fastapi_healthcheck_uri]()
-    * This module will reach out with a get command and validate that data comes back.  You can use this to test external vendors or services that your application requires.
+* [fastapi_healthcheck_sqlalchemy](https://github.com/jtom38/fastapi_healthcheck_sqlalchemy)
+* [fastapi_healthcheck_uri](https://github.com/jtom38/fastapi_healthcheck_uri)
 
 ## Writing a custom module
 
