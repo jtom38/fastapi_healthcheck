@@ -62,7 +62,7 @@ class HealthCheckFactory():
 
             # if we have one dependency unhealthy, the service in unhealthy
             if item.status == HealthCheckStatusEnum.UNHEALTHY:
-                self._health.status == HealthCheckStatusEnum.UNHEALTHY
+                self._health.status = HealthCheckStatusEnum.UNHEALTHY
 
             self._health.entities.append(item)
         self.__stopTimer__(False)
