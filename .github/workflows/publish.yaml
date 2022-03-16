@@ -1,0 +1,22 @@
+name: Publish Artifact
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*.*.*' ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Install Poetry
+        run: |
+          pip3 install poetry
