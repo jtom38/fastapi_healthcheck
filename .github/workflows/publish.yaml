@@ -4,14 +4,15 @@ on:
   push:
     branches: [ master ]
     tags: [ 'v*.*.*' ]
-
+  pull_request:
+    branches: [ features/dependency-update ]
+    
 jobs:
   build:
 
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
 
     steps:
       - name: Checkout repository
@@ -20,3 +21,15 @@ jobs:
       - name: Install Poetry
         run: |
           pip3 install poetry
+
+      - name: Poetry - Install
+        run: |
+          poetry install
+
+      - name: Poetry - build
+        run: |
+          poetry build
+        
+      #- name: Poetry - Publish
+      #  run: |
+      #    poetry publish
