@@ -1,5 +1,5 @@
 from typing import Callable
-from starlette.responses import Response, JSONResponse
+from starlette.responses import JSONResponse
 from .service import HealthCheckFactory
 from .enum import HealthCheckStatusEnum
 
@@ -14,7 +14,7 @@ def healthCheckRoute(factory: HealthCheckFactory) -> Callable:
     
     _factory = factory
 
-    def endpoint() -> Response:
+    def endpoint() -> JSONResponse:
         res = _factory.check()    
         if res['status'] == HealthCheckStatusEnum.UNHEALTHY.value:
             return JSONResponse(content=res, status_code=500)
