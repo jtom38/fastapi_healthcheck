@@ -1,0 +1,35 @@
+name: Build Artifact
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4.2.0
+        with:
+          python-version: "3.9"
+      
+      - name: Install Poetry
+        run: |
+          pip3 install poetry
+
+      - name: Poetry - Install
+        run: |
+          poetry install
+
+      - name: Poetry - build
+        run: |
+          poetry build
+        
