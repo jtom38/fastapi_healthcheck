@@ -35,6 +35,9 @@ jobs:
         run: |
           poetry build
         
-      #- name: Poetry - Publish
-      #  run: |
-      #    poetry publish
+      - name: Poetry - Publish 
+        shell: bash
+        env:
+          API_TOKEN: ${{ secrets.PIPAPIKEY }}
+        run: |
+          poetry publish -u "__token__" -p "$API_TOKEN" --skip-existing
