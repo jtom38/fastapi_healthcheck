@@ -104,8 +104,6 @@ class HealthCheckPostgres(HealthCheckBase, HealthCheckInterface):
 
     def __init__(self, connectionString: str) -> None:
         raise Exception()
-        self._connectionString = connectionString
-        pass
 
     def __checkHealth__(self) -> bool:
         print(self.setConnectionString)
