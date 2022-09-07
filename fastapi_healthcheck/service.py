@@ -30,8 +30,7 @@ class HealthCheckFactory():
     def __getTimeTaken__(self, entityTimer: bool) -> datetime:
         if entityTimer == True:
             return self._entityStopTime - self._entityStartTime
-        else:
-            return self._totalStopTime - self._totalStartTime
+        return self._totalStopTime - self._totalStartTime
 
     def __dumpModel__(self, model: HealthCheckModel) -> str:
         """This goes and convert python objects to something a json object."""
@@ -39,13 +38,13 @@ class HealthCheckFactory():
         for i in model.entities:
             i.status = i.status.value
             i.timeTaken = str(i.timeTaken)
-            l.append(i.__dict__)
+            l.append(dict(i))
 
         model.entities = l
         model.status = model.status.value
         model.totalTimeTaken = str(model.totalTimeTaken)
-        model = model.__dict__
-        return model
+
+        return dict(model)
 
     def check(self) -> HealthCheckModel:
         self._health = HealthCheckModel()
@@ -83,8 +82,8 @@ class HealthCheckBase():
         return self._connectionUri
 
     def setName(self, value: str) -> str:
-        if value == '':
-            raise Exception(f"Missing a valid name.")
+        if not value:
+            raise Exception("Missing a valid name.")
         self._name = value
 
     def getService(self) -> str:
@@ -103,9 +102,7 @@ class HealthCheckPostgres(HealthCheckBase, HealthCheckInterface):
     _tags: List[str]
 
     def __init__(self, connectionString: str) -> None:
-        raise Exception()
-        self._connectionString = connectionString
-        pass
+        raise Exception('Not Implemented!')
 
     def __checkHealth__(self) -> bool:
         print(self.setConnectionString)
