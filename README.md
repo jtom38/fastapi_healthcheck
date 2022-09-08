@@ -70,3 +70,5 @@ If you have made a public service module and want to see it on this list, please
 You can easily expand on this core module to add other health checks for other services.  Generate a new service that pulls in [HealthCheckInterface](https://github.com/jtom38/fastapi_healthcheck/blob/master/fastapi_healthcheck/domain.py#L6) and [HealthCheckBase](https://github.com/jtom38/fastapi_healthcheck/blob/master/fastapi_healthcheck/service.py#L75).  With those, you can build the respective class around the interface.
 
 Once you have your service ready to go, add it to the HealthCheckFactory, and let the testing start.
+
+If you would like to see an example of a custom service see [fastapi_healthcheck_sqlalchemy](https://github.com/jtom38/fastapi_healthcheck_sqlalchemy/blob/master/fastapi_healthcheck_sqlalchemy/service.py).  This will give you a better example of what you need to do to create your own module to interface with healthcheck.
