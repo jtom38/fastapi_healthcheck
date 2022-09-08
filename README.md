@@ -4,6 +4,10 @@ Easy to use health check for your FastAPI.  This is the root module that will le
 
 This module does not contain any service checkers, but you can easily add them.  The other modules are not in this root module due to different dependencies required for each one.  This is made so you only bring in the packages that you need to not add extra packages.
 
+## Install
+
+`pip install fastapi-healthcheck` or `poetry add fastapi-healthcheck`
+
 ## Adding Health Checks
 
 Here is what you need to get started.
@@ -11,6 +15,7 @@ Here is what you need to get started.
 ```python
 from fastapi import FastAPI
 from fastapi_healthcheck import HealthCheckFactory, healthCheckRoute
+from fastapi_healthcheck_sqlalchemy import HealthCheckSQLAlchemy
 
 app = FastAPI()
 
@@ -58,8 +63,10 @@ When you request your health check, it will go and check all the entries that ha
 * [fastapi_healthcheck_sqlalchemy](https://github.com/jtom38/fastapi_healthcheck_sqlalchemy)
 * [fastapi_healthcheck_uri](https://github.com/jtom38/fastapi_healthcheck_uri)
 
+If you have made a public service module and want to see it on this list, please open a new issue so we can add it to the list.
+
 ## Writing a custom module
 
-You can easily expand on this core module to add other health checks for other services.  Generate a new service that pulls in [HealthCheckInterface]() and [HealthCheckBase]().  With those, you can build the respective class around the interface.
+You can easily expand on this core module to add other health checks for other services.  Generate a new service that pulls in [HealthCheckInterface](https://github.com/jtom38/fastapi_healthcheck/blob/master/fastapi_healthcheck/domain.py#L6) and [HealthCheckBase](https://github.com/jtom38/fastapi_healthcheck/blob/master/fastapi_healthcheck/service.py#L75).  With those, you can build the respective class around the interface.
 
 Once you have your service ready to go, add it to the HealthCheckFactory, and let the testing start.
