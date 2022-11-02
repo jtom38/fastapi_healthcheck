@@ -6,7 +6,6 @@ from .enum import HealthCheckStatusEnum
 class HealthCheckInterface(ABC):
     _connectionUri: str
     _alias: str
-    #_service: str
     _tags: List[str]
 
     @abstractclassmethod
@@ -32,6 +31,3 @@ class HealthCheckInterface(ABC):
     def __checkHealth__(self) -> HealthCheckStatusEnum:
         """Requests data from the endpoint to validate health."""
         pass
-    
-
-

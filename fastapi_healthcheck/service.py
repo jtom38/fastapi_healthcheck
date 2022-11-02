@@ -5,7 +5,7 @@ from typing import List
 from datetime import datetime
 
 
-class HealthCheckFactory():
+class HealthCheckFactory:
     _healthItems: List[HealthCheckInterface]
     _health: HealthCheckModel
 
@@ -66,15 +66,15 @@ class HealthCheckFactory():
             self._health.entities.append(item)
         self.__stopTimer__(False)
         self._health.totalTimeTaken = self.__getTimeTaken__(False)
-        
+
         self._health = self.__dumpModel__(self._health)
 
         return self._health
 
 
-class HealthCheckBase():
+class HealthCheckBase:
     def setConnectionUri(self, value: str) -> None:
-        if value == '':
+        if value == "":
             raise Exception(f"{self._service} ConnectionUri is missing a value.")
         self._connectionUri = value
 
@@ -94,16 +94,3 @@ class HealthCheckBase():
 
     def getAlias(self) -> str:
         return self._alias
-
-
-class HealthCheckPostgres(HealthCheckBase, HealthCheckInterface):
-    _connectionString: str
-    _service: str = 'postgresql'
-    _tags: List[str]
-
-    def __init__(self, connectionString: str) -> None:
-        raise Exception('Not Implemented!')
-
-    def __checkHealth__(self) -> bool:
-        print(self.setConnectionString)
-        pass
