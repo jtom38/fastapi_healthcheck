@@ -8,11 +8,11 @@ from pydantic import BaseModel
 class HealthCheckEntityModel(BaseModel):
     alias: str
     status: Union[HealthCheckStatusEnum, str] = HealthCheckStatusEnum.HEALTHY
-    timeTaken: Union[Optional[datetime], str]
+    timeTaken: Union[Optional[datetime], str] = ""
     tags: List[str] = list()
 
 
 class HealthCheckModel(BaseModel):
     status: Union[HealthCheckStatusEnum, str] = HealthCheckStatusEnum.HEALTHY
-    totalTimeTaken: Union[Optional[datetime], str]
+    totalTimeTaken: Union[Optional[datetime], str] = ""
     entities: List[HealthCheckEntityModel] = list()
