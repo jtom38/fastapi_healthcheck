@@ -51,7 +51,11 @@ class HealthCheckFactory:
         self.__startTimer__(False)
         for i in self._healthItems:
             # Generate the model
-            item = HealthCheckEntityModel(alias=i._alias, tags=i._tags)
+            if not hasattr(i, "_tags"):
+                i._tags = list()
+            item = HealthCheckEntityModel(
+                alias=i._alias, tags=i._tags if i._tags else []
+            )
 
             # Track how long the entity took to respond
             self.__startTimer__(True)
