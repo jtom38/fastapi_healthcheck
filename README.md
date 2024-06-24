@@ -62,6 +62,7 @@ When you request your health check, it will go and check all the entries that ha
 
 * [fastapi_healthcheck_sqlalchemy](https://github.com/jtom38/fastapi_healthcheck_sqlalchemy)
 * [fastapi_healthcheck_uri](https://github.com/jtom38/fastapi_healthcheck_uri)
+* [fastapi_healthcheck_mongodb](https://github.com/anesmemisevic/fastapi_healthcheck_mongodb)
 
 If you have made a public service module and want to see it on this list, please open a new issue so we can add it to the list.
 
